@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Life : MonoBehaviour
 {
-    private int life = 20; //体力
+    [SerializeField] int life = 20; //体力
     void FixedUpdate()
     {
         if(life <= 0)
