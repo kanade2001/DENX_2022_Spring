@@ -8,7 +8,7 @@ public class EM_LtoR : MonoBehaviour
 
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         this.transform.Translate(-0.05f,0,0); //直線移動
     }

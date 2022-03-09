@@ -5,7 +5,7 @@ using UnityEngine.Pool;
 
 public class Destroy : MonoBehaviour
 {
-    void Update()
+    void FixedUpdate()
     {
         float x = transform.position.x;
         float y = transform.position.y;

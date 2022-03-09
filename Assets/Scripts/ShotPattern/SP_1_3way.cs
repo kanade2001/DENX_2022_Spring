@@ -17,13 +17,13 @@ public class SP_1_3way : MonoBehaviour
     // Update is called once per frame
     private IEnumerator wait()
     {
-        for(int i=0;i<60;i++)
+        for(int i=0;i<120;i++)
         {
             yield return null;
         }
     }
 
-    void Update()
+    void FixedUpdate()
     {
         if(_count%30==0){
             bullets.radiation(

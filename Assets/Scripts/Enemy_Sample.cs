@@ -15,7 +15,7 @@ public class Enemy_Sample : MonoBehaviour
         script_shoot = gb.GetComponent<Bullets>();
     }
 
-    void Update()
+    void FixedUpdate()
     {
         if(framecount%6==0){
             Debug.Log("shot");
