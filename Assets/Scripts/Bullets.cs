@@ -11,7 +11,7 @@ public class Bullets : MonoBehaviour
 
     void Start()
     {
-        script = GameObject.Find("BulletsScriptObj").GetComponent<ObjectPool>();
+        script = GameObject.Find("BulletManager").GetComponent<ObjectPool>();
     }
 
 
@@ -34,7 +34,6 @@ public class Bullets : MonoBehaviour
         if(direction < 0)
         {
             direction = GetAngle(Pos);
-            Debug.Log(direction);
         }
 
         //

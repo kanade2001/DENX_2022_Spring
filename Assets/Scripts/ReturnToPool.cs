@@ -7,7 +7,7 @@ public class ReturnToPool : MonoBehaviour
     private ObjectPool script_pool;
     void Start()
     {
-        script_pool = GameObject.Find("BulletsScriptObj").GetComponent<ObjectPool>();
+        script_pool = GameObject.Find("BulletManager").GetComponent<ObjectPool>();
     }
 
     void Update()
