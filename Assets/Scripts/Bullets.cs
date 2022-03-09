@@ -41,17 +41,17 @@ public class Bullets : MonoBehaviour
         if(way==1)
         {
             float dir = direction;
-            //var bullet = script.Pool.Get();
-            //bullet.transform.position = Pos;
-            GameObject bullet = Instantiate(shot_1, Pos, Quaternion.identity);
+            var bullet = script.Pool.Get();
+            bullet.transform.position = Pos;
+            //GameObject bullet = Instantiate(shot_1, Pos, Quaternion.identity);
             Rigidbody2D rb = bullet.transform.GetComponent<Rigidbody2D>();
             rb.velocity = new Vector3(-Mathf.Sin(dir)*speed, -Mathf.Cos(dir)*speed,0.0f);
         }else{
             for(int i=0; i<way; i++){
                 float dir = direction - spread/2.0f + spread/(float)(way-1)*(float)i;
-                //var bullet = script.Pool.Get();
-                //bullet.transform.position = Pos;
-                GameObject bullet = Instantiate(shot_1, Pos, Quaternion.identity);
+                var bullet = script.Pool.Get();
+                bullet.transform.position = Pos;
+                //GameObject bullet = Instantiate(shot_1, Pos, Quaternion.identity);
                 Rigidbody2D rb = bullet.transform.GetComponent<Rigidbody2D>();
                 rb.velocity = new Vector3(-Mathf.Sin(dir)*speed, -Mathf.Cos(dir)*speed,0.0f);
             }

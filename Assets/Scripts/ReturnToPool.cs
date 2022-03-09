@@ -4,24 +4,19 @@ using UnityEngine;
 
 public class ReturnToPool : MonoBehaviour
 {
-    public ParticleSystem Particle;
-    public ObjectPool<ParticleSystem> Pool;
-
+    private ObjectPool script_pool;
     void Start()
     {
-        Particle = GetComponent<ParticleSystem>();
-        var main = Particle.main;
-        // Callbackを指定すると、パーティクルが終了するときに
-        // コールバックメソッドとしてOnParticleSystemStopped
-        // が呼び出される
-        main.stopAction = ParticleSystemStopAction.Callback;
+        script_pool = GameObject.Find("BulletsScriptObj").GetComponent<ObjectPool>();
     }
 
-    void OnParticleSystemStopped()
+    void Update()
     {
-        // パーティクルシステムが停止したときにここが呼び出される
-
-        // プールから借りていたパーティクルを解放(返却)する
-        Pool.Release(Particle);
+        float x = transform.position.x;
+        float y = transform.position.y;
+        if(System.Math.Abs(x)>7 || System.Math.Abs(y)>7)
+        {
+            script_pool.Pool.Release(gameObject);
+        }
     }
 }

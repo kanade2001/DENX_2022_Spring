@@ -15,74 +15,53 @@ public class ObjectPool : MonoBehaviour
     // プールサイズを最大どれだけ大きくするか
     public int MaxSize = 100;
 
-    public ObjectPool<ParticleSystem> Pool
+    public ObjectPool<GameObject> Pool
     {
         get
         {
             if (_pool == null)
             {
-                _pool = new ObjectPool<ParticleSystem>(OnCreatePoolObject, OnTakeFromPool, OnReturnedToPool, OnDestroyPoolObject, false, DefaultCapacity, MaxSize);
+                _pool = new ObjectPool<GameObject>(
+                    OnCreatePoolObject,
+                    OnTakeFromPool,
+                    OnReturnedToPool,
+                    OnDestroyPoolObject,
+                    false,
+                    DefaultCapacity,
+                    MaxSize);
             }
             return _pool;
         }
     }
 
-    ParticleSystem OnCreatePoolObject()
+    GameObject OnCreatePoolObject()
     {
         Debug.Log("Called CreatePooledItem");
 
         // プールするパーティクルシステムの作成
         //var go = new GameObject($"Pooled Particle System: {_nextId++}");
-        var go = Instantiate(shot_1,transform.position, Quaternion.identity);
-        var ps = go.AddComponent<ParticleSystem>();
-        // パーティクルの終了挙動をエミッター停止 & エミッションのクリアとする
-        ps.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
-
-        // パーティクルを1秒のワンショット再生とする
-        // (ので約1秒後にパーティクルは停止する)
-        var main = ps.main;
-        main.duration = 1f;
-        main.startLifetime = 1f;
-        main.loop = false;
-
-        // パーティクルが終了したらプールに返却するための
-        // 挙動を実装したコンポーネントをアタッチ
-        var returnToPool = go.AddComponent<ReturnToPool>();
-        returnToPool.Pool = Pool;
-
-        Debug.Log($"Created {ps.gameObject.name}");
-
-        return ps;
+        var obj = Instantiate(shot_1, transform.position, Quaternion.identity);
+        return obj;
     }
 
-    void OnTakeFromPool(ParticleSystem ps)
+    void OnTakeFromPool(GameObject obj)
     {
-        Debug.Log($"Called OnTakeFromPool: ({ps.gameObject.name})");
-
-        // プールからパーティクルシステムを借りるときに
-        // そのオブジェクトのアクティブをONにする
-        ps.gameObject.SetActive(true);
+        Debug.Log($"Called OnTakeFromPool");
+        obj.SetActive(true);
     }
 
-    void OnReturnedToPool(ParticleSystem ps)
+    void OnReturnedToPool(GameObject obj)
     {
-        Debug.Log($"Called OnReturnedToPool: ({ps.gameObject.name})");
+        Debug.Log($"Called OnReturnedToPool");
 
         // 逆にプールにパーティクルシステムを返却するときに
         // そのオブジェクトのアクティブをOFFにする
-        ps.gameObject.SetActive(false);
+        obj.SetActive(false);
     }
 
-    void OnDestroyPoolObject(ParticleSystem ps)
+    void OnDestroyPoolObject(GameObject obj)
     {
-        Debug.Log($"Called OnDestroyPoolObject: ({ps.gameObject.name})");
-
-        // プールされたパーティクルの削除が要求されているので、
-        // オブジェクトを破棄する。
-        //
-        // OnCreatePoolObjectでオブジェクトを生成しているので
-        // ここで破棄する責務があるという解釈
-        Destroy(ps.gameObject);
+        Destroy(obj);
     }
 
     void ClearPool()
@@ -95,5 +74,5 @@ public class ObjectPool : MonoBehaviour
         }
     }
     
-    private ObjectPool<ParticleSystem> _pool = null;
+    private ObjectPool<GameObject> _pool = null;
 }

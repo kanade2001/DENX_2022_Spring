@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1697043011675031335}
   - component: {fileID: -6753036690619943151}
   - component: {fileID: 499832087128117659}
+  - component: {fileID: 1375116839933313347}
   m_Layer: 14
   m_Name: shot_1
   m_TagString: Untagged
@@ -131,8 +132,20 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 530690251311320814}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0c15eeaaeef6cc643946a012579937e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1375116839933313347
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 530690251311320814}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90b490370532847659896c34e4f73c0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
