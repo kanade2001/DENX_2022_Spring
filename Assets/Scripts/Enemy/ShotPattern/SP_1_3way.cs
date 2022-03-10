@@ -27,7 +27,7 @@ public class SP_1_3way : MonoBehaviour
     {
         if(_count%30==0){
             bullets.radiation(
-                1,
+                "shot_1",
                 1.0f,
                 this.transform.position,
                 3,

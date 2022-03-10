@@ -6,18 +6,16 @@ using UnityEngine.Pool;
 
 public class Bullets : MonoBehaviour
 {
-    private ObjectPool script;
-    public GameObject shot_1;
-    
+    private ObjectPool script_pool;
 
     void Start()
     {
-        script = GameObject.Find("ShotManager").GetComponent<ObjectPool>();
+        script_pool = GameObject.Find("ShotManager").GetComponent<ObjectPool>();
     }
 
 
     private float Pi = Mathf.Acos(-1);
-    public void radiation(int bullet_type, float scale, Vector3 Pos, int way, float speed, float spread=0.0f, float direction=-1)
+    public void radiation(string shot_type, float scale, Vector3 Pos, int way, float speed, float spread=0.0f, float direction=-1)
     {
         //bullet_type: 弾の種類
         //scale: 弾の大きさ
@@ -41,17 +39,15 @@ public class Bullets : MonoBehaviour
         if(way==1)
         {
             float dir = direction;
-            var bullet = script.Pool.Get();
+            var bullet = script_pool.Create(shot_type);
             bullet.transform.position = Pos;
-            //GameObject bullet = Instantiate(shot_1, Pos, Quaternion.identity);
             Rigidbody2D rb = bullet.transform.GetComponent<Rigidbody2D>();
             rb.velocity = new Vector3(-Mathf.Sin(dir)*speed, -Mathf.Cos(dir)*speed,0.0f);
         }else{
             for(int i=0; i<way; i++){
                 float dir = direction - spread/2.0f + spread/(float)(way-1)*(float)i;
-                var bullet = script.Pool.Get();
+                var bullet = script_pool.Create(shot_type);
                 bullet.transform.position = Pos;
-                //GameObject bullet = Instantiate(shot_1, Pos, Quaternion.identity);
                 Rigidbody2D rb = bullet.transform.GetComponent<Rigidbody2D>();
                 rb.velocity = new Vector3(-Mathf.Sin(dir)*speed, -Mathf.Cos(dir)*speed,0.0f);
             }

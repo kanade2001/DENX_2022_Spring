@@ -2,7 +2,7 @@
 using UnityEngine.Pool;
 using UnityEngine;
 
-public class ReturnToPool : MonoBehaviour
+public class Shot_Script : MonoBehaviour
 {
     private ObjectPool script_pool;
     void Start()
@@ -16,7 +16,7 @@ public class ReturnToPool : MonoBehaviour
         float y = transform.position.y;
         if(System.Math.Abs(x)>7 || System.Math.Abs(y)>7)
         {
-            script_pool.Pool.Release(gameObject);
+            script_pool.Release(gameObject);
         }
     }
 }

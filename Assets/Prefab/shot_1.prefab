@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8844217795035550590}
   - component: {fileID: 1697043011675031335}
   - component: {fileID: -6753036690619943151}
-  - component: {fileID: 1375116839933313347}
+  - component: {fileID: 2333585795421306884}
   m_Layer: 14
   m_Name: shot_1
   m_TagString: Untagged
@@ -124,7 +124,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.08
---- !u!114 &1375116839933313347
+--- !u!114 &2333585795421306884
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
