@@ -5,7 +5,7 @@ using UnityEngine;
 public class SCN_1 : MonoBehaviour
 {
     // Start is called before the first frame update
-    public GameObject enemy_0;
+    public GameObject enemy_1_0;
     async void Start()
     {
         StartCoroutine(wave1());
@@ -17,7 +17,7 @@ public class SCN_1 : MonoBehaviour
             for(int j=0;j<29;j++){
                 yield return null;
             }
-            Instantiate(enemy_0, new Vector3(-4.2f+1.4f*(float)i,6.0f,0.0f),Quaternion.identity);
+            Instantiate(enemy_1_0, new Vector3(-4.2f+1.4f*(float)i,6.0f,0.0f),Quaternion.identity);
         }
     }
 }

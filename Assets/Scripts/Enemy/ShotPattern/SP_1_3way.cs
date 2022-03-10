@@ -10,7 +10,7 @@ public class SP_1_3way : MonoBehaviour
     private Bullets bullets;
     void Start()
     {
-        bullets = GameObject.Find("BulletManager").GetComponent<Bullets>();
+        bullets = GameObject.Find("ShotManager").GetComponent<Bullets>();
         StartCoroutine(wait());
     }
 

@@ -8,10 +8,11 @@ public class Bullets : MonoBehaviour
 {
     private ObjectPool script;
     public GameObject shot_1;
+    
 
     void Start()
     {
-        script = GameObject.Find("BulletManager").GetComponent<ObjectPool>();
+        script = GameObject.Find("ShotManager").GetComponent<ObjectPool>();
     }
 
 

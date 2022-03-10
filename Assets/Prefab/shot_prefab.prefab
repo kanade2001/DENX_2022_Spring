@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 2415056389407046797}
   - component: {fileID: 7209109435236750240}
   - component: {fileID: -5327284421840248208}
-  - component: {fileID: 4775702201481876343}
   m_Layer: 11
   m_Name: shot_prefab
   m_TagString: Untagged
@@ -137,15 +136,3 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &4775702201481876343
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2415056389407046802}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c15eeaaeef6cc643946a012579937e4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
