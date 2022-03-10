@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EM_LtoR : MonoBehaviour
+public class MP_LtoR : MonoBehaviour
 {
     // Start is called before the first frame update
 

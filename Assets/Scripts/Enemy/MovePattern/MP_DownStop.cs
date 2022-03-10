@@ -2,10 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EM_DownStop : MonoBehaviour
+public class MP_DownStop : MonoBehaviour
 {
-    // Start is called before the first frame update
-
     Rigidbody2D rb;
     void Start()
     {
