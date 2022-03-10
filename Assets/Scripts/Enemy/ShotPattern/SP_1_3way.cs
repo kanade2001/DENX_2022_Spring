@@ -7,10 +7,10 @@ public class SP_1_3way : MonoBehaviour
     // Start is called before the first frame update
 
     private int _count=0;
-    private Bullets bullets;
+    private ShotGenerator SG;
     void Start()
     {
-        bullets = GameObject.Find("ShotManager").GetComponent<Bullets>();
+        SG = GameObject.Find("ShotManager").GetComponent<ShotGenerator>();
         StartCoroutine(wait());
     }
 
@@ -26,7 +26,7 @@ public class SP_1_3way : MonoBehaviour
     void FixedUpdate()
     {
         if(_count%30==0){
-            bullets.radiation(
+            SG.radiation(
                 "shot_1",
                 1.0f,
                 this.transform.position,

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Pool;
 
 
-public class Bullets : MonoBehaviour
+public class ShotGenerator : MonoBehaviour
 {
     private ObjectPool script_pool;
 

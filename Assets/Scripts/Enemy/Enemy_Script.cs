@@ -6,7 +6,15 @@ public class Enemy_Script : MonoBehaviour
 {
     [SerializeField] int life = 20; //体力
     [SerializeField] int score = 100;
-    [SerializeField] int item = 0;
+    [SerializeField] int p_item = 0;
+    [SerializeField] int s_item = 0;
+    [SerializeField] int o_item = 0;
+
+    private ItemManager itemmanager;
+    void start()
+    {
+        itemmanager = GameObject.Find("ItemManager").GetComponent<ItemManager>();
+    }
 
     void FixedUpdate()
     {
@@ -31,6 +39,7 @@ public class Enemy_Script : MonoBehaviour
 
     private void shootdown()
     {
+        itemmanager.MakeItem(this.transform.position,p_item,s_item,o_item);
         Destroy(gameObject);
     }
 }
