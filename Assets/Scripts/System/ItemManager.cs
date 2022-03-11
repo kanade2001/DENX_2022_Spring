@@ -6,10 +6,12 @@ public class ItemManager : MonoBehaviour
 {
     public List<GameObject> item = new List<GameObject>(4);
 
-    private ItemPool _itempool_script;
-    void start()
+    private ItemPool IP;
+    private CountManager CM;
+    void Start()
     {
-        _itempool_script = GameObject.Find("ItemManager").GetComponent<ItemPool>();
+        IP = GameObject.Find("ItemManager").GetComponent<ItemPool>();
+        CM = GameObject.Find("CountManager").GetComponent<CountManager>();
     }
     public void MakeItem(Vector3 pos, int p_item_num, int s_item_num, int o_item_num)
     {
@@ -17,25 +19,31 @@ public class ItemManager : MonoBehaviour
         //s_item : score item
         //o_item : 1->Extend 2->BomExtend
 
+        if(CM.Power == 400)
+        {
+            s_item_num += p_item_num;
+            p_item_num = 0;
+        }
+
         //itemの個数が1個のみの場合は敵の位置にアイテムを出現させる
         if(o_item_num == 1){
-            PopItem(pos,3);
+            PopItem(pos,2);
         }else if(o_item_num == 2){
-            PopItem(pos,4);
+            PopItem(pos,3);
         }else if(p_item_num == 1){
-            PopItem(pos,1);
+            PopItem(pos,0);
             p_item_num --;
         }else if(s_item_num == 1){
-            PopItem(pos,2);
+            PopItem(pos,1);
             s_item_num --;
         }
         
         while(p_item_num>0){
-            PopItem(RandomPopPoint(pos),1);
+            PopItem(RandomPopPoint(pos),0);
             p_item_num --;
         }
         while(s_item_num>0){
-            PopItem(RandomPopPoint(pos),2);
+            PopItem(RandomPopPoint(pos),1);
             s_item_num --;
         }
     }
@@ -49,7 +57,7 @@ public class ItemManager : MonoBehaviour
     }
     private void PopItem(Vector3 pos, int identifer)
     {
-        GameObject obj = _itempool_script.Create(identifer);
+        GameObject obj = IP.Create(identifer);
         obj.transform.position = pos;
     }
 }

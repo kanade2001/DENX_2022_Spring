@@ -26,7 +26,7 @@ public class SP_1_3way : MonoBehaviour
     void FixedUpdate()
     {
         if(_count%30==0){
-            SG.radiation(
+            SG.Radiation(
                 "shot_1",
                 1.0f,
                 this.transform.position,

@@ -5,13 +5,17 @@ using UnityEngine;
 public class ItemPool : MonoBehaviour
 {
     private List<GameObject> ItemList = new List<GameObject>();  //prefab用List
-    private List<string> ItemName = new List<string>{"e_item","b_item","p_item","s_item"};  //prefab <-> index変換用
+    private List<string> ItemName = new List<string>{"p_item","s_item","e_item","b_item"};  //prefab <-> index変換用
     private List<Stack<GameObject>> _itempool = new List<Stack<GameObject>>();  //ObjectPool
     private List<GameObject> _activeitem = new List<GameObject>();  //Activeなitem
     private int _popSeq = 5;  //足りない場合に一度にInstantiateする個数
 
-    void start()
+    void Start()
     {
+        for(int i=0;i<4;i++)
+        {
+            _itempool.Add(new Stack<GameObject>());
+        }
         ItemList = GameObject.Find("ItemManager").GetComponent<ItemManager>().item;
     }
 

@@ -12,6 +12,7 @@ public class ItemMove : MonoBehaviour
     }
     void FixedUpdate()
     {
+        Debug.Log(rb.velocity.y);
         if(rb.velocity.y > -2.0f)
         {
             var _force = new Vector3(0.0f,-1.5f,0.0f);

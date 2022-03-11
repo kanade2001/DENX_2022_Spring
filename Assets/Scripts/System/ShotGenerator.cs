@@ -15,7 +15,7 @@ public class ShotGenerator : MonoBehaviour
 
     private float Pi = Mathf.Acos(-1);
 
-    public void radiation(string shot_type, float scale, Vector3 Pos, int way, float speed, float spread=0.0f, float direction=-1)
+    public void Radiation(string shot_type, float scale, Vector3 Pos, int way, float speed, float spread=0.0f, float direction=-1)
     {
         //bullet_type: 弾の種類
         //scale: 弾の大きさ

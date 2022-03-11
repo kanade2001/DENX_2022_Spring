@@ -9,17 +9,20 @@ public class Player : MonoBehaviour
     private Vector2 playerPos;
     private int shot_time = 0;//射撃間隔用
     private int shot_rate = 10;
+    private CountManager CM;
+    private ShotGenerator SG;
 
     // Start is called before the first frame update
     void Start()
     {
         Application.targetFrameRate = 60;
+        CM = GameObject.Find("CountManager").GetComponent<CountManager>();
+        SG = GameObject.Find("ShotManager").GetComponent<ShotGenerator>();
     }
 
     // Update is called once per frame
     void Update()
     {
-
         PlayerMove();
         PlayerShot();
     }
@@ -58,12 +61,38 @@ public class Player : MonoBehaviour
         //ショット
         if(Input.GetKey(KeyCode.Z))
         {
-            if(shot_time % shot_rate == 0)//射撃レート
+            int _power = CM.Power;
+            shot_time ++;
+            shot_time %= 60;
+
+            if(_power<300)
             {
-                Instantiate(shot_prefab, transform.position, Quaternion.identity);
+                if(shot_time%12==0)
+                {
+                    SG.Radiation(
+                        "player_shot_1",
+                        1.0f,
+                        this.playerPos,
+                        2,
+                        1.5f,
+                        10.0f,
+                        180.0f
+                    );
+                }
+            }else{
+                if(shot_time%12==0)
+                {
+                    SG.Radiation(
+                        "player_shot_1",
+                        1.0f,
+                        this.playerPos,
+                        4,
+                        1.5f,
+                        20.0f,
+                        180.0f
+                    );
+                }
             }
-            shot_time += 1;
-            shot_time %= shot_rate;
         }
         if(Input.GetKeyUp(KeyCode.Z))
         {
