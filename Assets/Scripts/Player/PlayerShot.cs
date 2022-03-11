@@ -5,9 +5,14 @@ using UnityEngine;
 public class PlayerShot : MonoBehaviour
 {
 
+    private ObjectPool OP;
 
+    void Start()
+    {
+        OP = GameObject.Find("ShotManager").GetComponent<ObjectPool>();
+    }
     void FixedUpdate()
     {
-        this.transform.Translate(0,0.1f,0); //直線移動
+        
     }
 }

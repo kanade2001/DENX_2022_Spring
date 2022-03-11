@@ -8,7 +8,6 @@ public class Player : MonoBehaviour
     public GameObject shot_prefab;
     private Vector2 playerPos;
     private int shot_time = 0;//射撃間隔用
-    private int shot_rate = 10;
     private CountManager CM;
     private ShotGenerator SG;
 
@@ -74,21 +73,38 @@ public class Player : MonoBehaviour
                         1.0f,
                         this.playerPos,
                         2,
-                        1.5f,
-                        10.0f,
+                        5.0f,
+                        5.0f,
                         180.0f
                     );
                 }
             }else{
-                if(shot_time%12==0)
+                if(shot_time%10==0)
                 {
                     SG.Radiation(
                         "player_shot_1",
                         1.0f,
                         this.playerPos,
                         4,
-                        1.5f,
-                        20.0f,
+                        5.0f,
+                        10.0f,
+                        180.0f
+                    );
+                }
+            }
+            if(_power>=200)
+            {
+                int shot_rate = 30;
+                if(_power == 400){shot_rate /= 2;}
+                if(shot_time%shot_rate == 0)
+                {
+                    SG.Radiation(
+                        "player_shot_2",
+                        1.0f,
+                        this.playerPos,
+                        2,
+                        4.0f,
+                        120.0f,
                         180.0f
                     );
                 }

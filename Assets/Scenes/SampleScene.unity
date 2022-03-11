@@ -663,6 +663,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PrefabList:
   - {fileID: 2415056389407046802, guid: d29cac8e26fe04d269699fe4e2e349e4, type: 3}
+  - {fileID: 1720295722731381767, guid: f669fbf5535a14315a7bd2cb7c1f4df0, type: 3}
   - {fileID: 530690251311320814, guid: 5d0ffbbe6e76a40968fc63eff824cbed, type: 3}
   EnableObjList: []
 --- !u!1 &1486898193
