@@ -4,10 +4,6 @@ using UnityEngine;
 
 public class MP_LtoR : MonoBehaviour
 {
-    // Start is called before the first frame update
-
-
-    // Update is called once per frame
     void FixedUpdate()
     {
         this.transform.Translate(-0.05f,0,0); //直線移動

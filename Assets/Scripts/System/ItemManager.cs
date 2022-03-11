@@ -39,15 +39,14 @@ public class ItemManager : MonoBehaviour
             s_item_num --;
         }
     }
-
-
     private Vector3 RandomPopPoint(Vector3 pos)
     {
         float rad = Random.Range(0.0f,3.1f);
-        Vector3 _pos = new Vector3(pos.x+0.5f*Mathf.Cos(rad)+pos.y+0.5f*Mathf.Sin(rad),0.0f);
+        Vector3 _pos = new Vector3(
+            Mathf.Clamp(pos.x+0.5f*Mathf.Cos(rad),-5.0f,5.0f),
+            pos.y+0.5f*Mathf.Sin(rad));
         return _pos;
     }
-
     private void PopItem(Vector3 pos, int identifer)
     {
         GameObject obj = _itempool_script.Create(identifer);
