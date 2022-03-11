@@ -11,10 +11,12 @@ public class Enemy_Script : MonoBehaviour
     [SerializeField] int o_item = 0;
 
     private ItemManager IM;
+    private CountManager CM;
 
     void Start()
     {
         IM = GameObject.Find("ItemManager").GetComponent<ItemManager>();
+        CM = GameObject.Find("CountManager").GetComponent<CountManager>();
     }
 
     void FixedUpdate()
@@ -41,6 +43,7 @@ public class Enemy_Script : MonoBehaviour
     private void shootdown()
     {
         IM.MakeItem(this.transform.position,p_item,s_item,o_item);
+        CM.Score = score;
         Destroy(gameObject);
     }
 }

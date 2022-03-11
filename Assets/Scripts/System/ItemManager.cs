@@ -58,6 +58,9 @@ public class ItemManager : MonoBehaviour
     private void PopItem(Vector3 pos, int identifer)
     {
         GameObject obj = IP.Create(identifer);
-        obj.transform.position = pos;
+        obj.transform.position = new Vector3(
+            Mathf.Clamp(pos.x,-5.0f,5.0f),
+            Mathf.Clamp(pos.y,-5.0f,5.0f)
+        );
     }
 }
