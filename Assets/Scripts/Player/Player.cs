@@ -98,7 +98,8 @@ public class Player : MonoBehaviour
                 if(_power == 400){shot_rate /= 2;}
                 if(shot_time%shot_rate == 0)
                 {
-                    SG.Radiation(
+                    List<GameObject> _list = new List<GameObject>();
+                    _list = SG.Radiation(
                         "player_shot_2",
                         1.0f,
                         this.playerPos,
@@ -107,6 +108,9 @@ public class Player : MonoBehaviour
                         120.0f,
                         180.0f
                     );
+                    foreach(GameObject _obj in _list){
+                        _obj.GetComponent<PlayerShot_Homing>().Activated();
+                    }
                 }
             }
         }
