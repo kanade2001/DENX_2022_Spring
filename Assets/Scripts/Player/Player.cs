@@ -10,11 +10,15 @@ public class Player : MonoBehaviour
     private int shot_time = 0;//射撃間隔用
     private CountManager CM;
     private ShotGenerator SG;
+    Rigidbody2D rb;
+
+    bool Dead = false;
 
     // Start is called before the first frame update
     void Start()
     {
         Application.targetFrameRate = 60;
+        rb = this.GetComponent<Rigidbody2D>();
         CM = GameObject.Find("CountManager").GetComponent<CountManager>();
         SG = GameObject.Find("ShotManager").GetComponent<ShotGenerator>();
     }
@@ -22,14 +26,18 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        PlayerMove();
-        PlayerShot();
+        if(Dead == false){
+            PlayerMove();
+            PlayerShot();
+        }
     }
 
     void OnTriggerEnter2D(Collider2D coll)
     {
-        Destroy(coll.gameObject);
-        Destroy(gameObject);
+        if(Dead == false){
+            Dead = true;
+            StartCoroutine(Respawn());
+        }
     }
 
     private void PlayerMove()
@@ -118,5 +126,30 @@ public class Player : MonoBehaviour
         {
             shot_time = 0;
         }
+    }
+
+    private IEnumerator Respawn()
+    {
+        CM.Life = -1;
+        int _life = CM.Life;
+        if(_life<0)
+        {
+            gameover();
+        }
+        this.transform.position = new Vector2(0, -7);  //画面外に移動
+        rb.velocity = new Vector3(0,2,0);
+        while(this.transform.position.y < -3.0)
+        {
+            yield return null;
+        }
+        rb.velocity = new Vector3(0,0,0);
+        //judge = 0;
+        //this.desObj.SetActive(true);
+        Dead = false;
+    }
+
+    private void gameover()
+    {
+        
     }
 }

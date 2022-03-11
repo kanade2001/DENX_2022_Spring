@@ -32,7 +32,7 @@ public class Enemy_Script : MonoBehaviour
             shootdown();
         }
     }
-    
+
     void OnTriggerEnter2D(Collider2D coll)
     {
         Destroy(coll.gameObject);

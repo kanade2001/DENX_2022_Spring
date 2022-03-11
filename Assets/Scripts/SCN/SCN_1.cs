@@ -6,7 +6,7 @@ public class SCN_1 : MonoBehaviour
 {
     // Start is called before the first frame update
     public GameObject enemy_1_0;
-    async void Start()
+    void Start()
     {
         StartCoroutine(wave1());
     }
