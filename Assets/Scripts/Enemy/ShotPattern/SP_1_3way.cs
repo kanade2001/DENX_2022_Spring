@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class SP_1_3way : MonoBehaviour
 {
-    // Start is called before the first frame update
+    private int _count = 0;
 
-    private int _count=0;
     private ShotGenerator SG;
     void Start()
     {
@@ -14,10 +13,9 @@ public class SP_1_3way : MonoBehaviour
         StartCoroutine(wait());
     }
 
-    // Update is called once per frame
     private IEnumerator wait()
     {
-        for(int i=0;i<120;i++)
+        for (int i = 0; i < 120; i++)
         {
             yield return null;
         }
@@ -25,7 +23,8 @@ public class SP_1_3way : MonoBehaviour
 
     void FixedUpdate()
     {
-        if(_count%30==0){
+        if (_count % 30 == 0)
+        {
             SG.Radiation(
                 "shot_1",
                 1.0f,
@@ -36,8 +35,7 @@ public class SP_1_3way : MonoBehaviour
                 -1.0f
             );
         }
-        _count ++;
+        _count++;
+        _count %= 30;
     }
-
-
 }

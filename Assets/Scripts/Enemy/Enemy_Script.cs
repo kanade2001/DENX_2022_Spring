@@ -12,22 +12,24 @@ public class Enemy_Script : MonoBehaviour
 
     private ItemManager IM;
     private CountManager CM;
+    private ObjectPool OP;
 
     void Start()
     {
         IM = GameObject.Find("ItemManager").GetComponent<ItemManager>();
         CM = GameObject.Find("CountManager").GetComponent<CountManager>();
+        OP = GameObject.Find("ShotManager").GetComponent<ObjectPool>();
     }
 
     void FixedUpdate()
     {
         float x = transform.position.x;
         float y = transform.position.y;
-        if(System.Math.Abs(x)>7 || System.Math.Abs(y)>7)
+        if (System.Math.Abs(x) > 7 || System.Math.Abs(y) > 7)
         {
             Destroy(gameObject);
         }
-            if(life <= 0)
+        if (life <= 0)
         {
             shootdown();
         }
@@ -35,14 +37,21 @@ public class Enemy_Script : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D coll)
     {
-        Destroy(coll.gameObject);
-        life --;
-        Debug.Log(life);
+        if (coll.gameObject.name == "player_shot_1")
+        {
+            life--;
+            OP.Release(coll.gameObject);
+        }
+        else if (coll.gameObject.name == "player_shot_2")
+        {
+            life -= 3;
+            OP.Release(coll.gameObject);
+        }
     }
 
     private void shootdown()
     {
-        IM.MakeItem(this.transform.position,p_item,s_item,o_item);
+        IM.MakeItem(this.transform.position, p_item, s_item, o_item);
         CM.Score = score;
         Destroy(gameObject);
     }

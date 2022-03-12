@@ -21,14 +21,17 @@ public class PlayerShot_Homing : MonoBehaviour
 
         GameObject[] _elist = GameObject.FindGameObjectsWithTag("Enemy");
         GameObject[] _blist = GameObject.FindGameObjectsWithTag("Boss");
-        if(_elist.Length + _blist.Length==0){
+        if (_elist.Length + _blist.Length == 0)
+        {
             target = null;
-        }else{
-            foreach(GameObject _obj in _elist)
+        }
+        else
+        {
+            foreach (GameObject _obj in _elist)
             {
                 ClosestTarget(_obj);
             }
-            foreach(GameObject _obj in _blist)
+            foreach (GameObject _obj in _blist)
             {
                 ClosestTarget(_obj);
             }
@@ -37,7 +40,7 @@ public class PlayerShot_Homing : MonoBehaviour
         void ClosestTarget(GameObject _obj)
         {
             tmpdis = Vector3.Distance(this.transform.position, _obj.transform.position);
-            if(tmpdis<mindis || mindis == 0)
+            if (tmpdis < mindis || mindis == 0)
             {
                 mindis = tmpdis;
                 target = _obj;
@@ -47,11 +50,11 @@ public class PlayerShot_Homing : MonoBehaviour
 
     void FixedUpdate()
     {
-        if(target != null)
+        if (target != null)
         {
             var diff = (target.transform.position - this.transform.position).normalized;
             rb.AddForce(diff * 4.0f);
-            var speed_updated = rb.velocity.normalized*3.0f;
+            var speed_updated = rb.velocity.normalized * 3.0f;
             rb.velocity = speed_updated;
         }
     }

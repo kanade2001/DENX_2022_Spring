@@ -4,12 +4,10 @@ using UnityEngine;
 
 public class CountManager : MonoBehaviour
 {
-
     private int _life = 3;
     private int _bom = 3;
     private int _power = 400;
     private int _score = 0;
-
 
     public int Life
     {
@@ -26,7 +24,7 @@ public class CountManager : MonoBehaviour
     public int Power
     {
         get => _power;
-        set => _power = Mathf.Clamp(_power + value,100,400);
+        set => _power = Mathf.Clamp(_power + value, 100, 400);
     }
 
     public int Score
