@@ -9,10 +9,12 @@ public class Player : MonoBehaviour
     private Vector2 playerPos;
     private int shot_time = 0;//射撃間隔用
     private CountManager CM;
+    private ItemManager IM;
     private ShotGenerator SG;
     Rigidbody2D rb;
+    public bool IsDead = false;
 
-    bool Dead = false;
+    private bool IsDebugmode = true;
 
     // Start is called before the first frame update
     void Start()
@@ -20,23 +22,38 @@ public class Player : MonoBehaviour
         Application.targetFrameRate = 60;
         rb = this.GetComponent<Rigidbody2D>();
         CM = GameObject.Find("CountManager").GetComponent<CountManager>();
+        IM = GameObject.Find("ItemManager").GetComponent<ItemManager>();
         SG = GameObject.Find("ShotManager").GetComponent<ShotGenerator>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Dead == false){
+        if(IsDead == false){ //非死亡時
             PlayerMove();
             PlayerShot();
+        }
+        if(this.gameObject.transform.position.y > 3.5f)
+        {
+            IM.AutoItemCollect();
         }
     }
 
     void OnTriggerEnter2D(Collider2D coll)
     {
-        if(Dead == false){
-            Dead = true;
-            StartCoroutine(Respawn());
+        if(IsDead == false){
+            if(coll.gameObject.tag == "Item")
+            {
+                coll.gameObject.GetComponent<ItemMove>().ItemCollect();
+            }
+            else
+            {
+                if(!IsDebugmode)
+                {
+                    IsDead = true;
+                    StartCoroutine(Respawn());
+                }
+            }
         }
     }
 
@@ -87,7 +104,7 @@ public class Player : MonoBehaviour
                     );
                 }
             }else{
-                if(shot_time%10==0)
+                if(shot_time%12==0)
                 {
                     SG.Radiation(
                         "player_shot_1",
@@ -117,7 +134,7 @@ public class Player : MonoBehaviour
                         180.0f
                     );
                     foreach(GameObject _obj in _list){
-                        _obj.GetComponent<PlayerShot_Homing>().Activated();
+                        _obj.GetComponent<PlayerShot_Homing>().Activate();
                     }
                 }
             }
@@ -145,11 +162,11 @@ public class Player : MonoBehaviour
         rb.velocity = new Vector3(0,0,0);
         //judge = 0;
         //this.desObj.SetActive(true);
-        Dead = false;
+        IsDead = false;
     }
 
     private void gameover()
     {
-        
+
     }
 }

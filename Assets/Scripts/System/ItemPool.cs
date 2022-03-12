@@ -50,12 +50,11 @@ public class ItemPool : MonoBehaviour
         _itempool[identifer].Push(sObj);
     }
 
-    public void AllCollect(Vector3 pos)
+    public void AutoItemCollect()
     {
-        while(_activeitem.Count>0)
+        foreach (GameObject cObj in _activeitem)
         {
-            GameObject cObj = _activeitem[_activeitem.Count - 1];
-            Release(cObj);
+            cObj.GetComponent<ItemMove>().ItemCollect();
         }
     }
 }

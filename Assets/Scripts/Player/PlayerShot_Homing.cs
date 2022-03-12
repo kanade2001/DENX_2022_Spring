@@ -6,15 +6,15 @@ using UnityEngine;
 public class PlayerShot_Homing : MonoBehaviour
 {
     private GameObject target = null;
-    Rigidbody2D rb;
+    private Rigidbody2D rb;
 
     void Start()
     {
         rb = this.GetComponent<Rigidbody2D>();
-        Activated();
+        Activate();
     }
 
-    public void Activated()
+    public void Activate()
     {
         float tmpdis = 0;
         float mindis = 0;

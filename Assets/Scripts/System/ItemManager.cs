@@ -7,7 +7,9 @@ public class ItemManager : MonoBehaviour
     public List<GameObject> item = new List<GameObject>(4);
 
     private ItemPool IP;
+    private ItemMove IM;
     private CountManager CM;
+
     void Start()
     {
         IP = GameObject.Find("ItemManager").GetComponent<ItemPool>();
@@ -58,9 +60,15 @@ public class ItemManager : MonoBehaviour
     private void PopItem(Vector3 pos, int identifer)
     {
         GameObject obj = IP.Create(identifer);
+        IM = obj.GetComponent<ItemMove>();
         obj.transform.position = new Vector3(
             Mathf.Clamp(pos.x,-5.0f,5.0f),
             Mathf.Clamp(pos.y,-5.0f,5.0f)
         );
+        IM.Activate();
+    }
+    public void AutoItemCollect()
+    {
+        IP.AutoItemCollect();
     }
 }

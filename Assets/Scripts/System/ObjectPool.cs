@@ -10,6 +10,7 @@ public class ObjectPool : MonoBehaviour
 
     private int _popFirst = 50;
     private int _popSeq = 5;
+
     public void Register(string name){//登録
         GameObject regist = PrefabList.Find(x => x.name == name);
         if(!ObjPoolDic.ContainsKey(regist.name)){
