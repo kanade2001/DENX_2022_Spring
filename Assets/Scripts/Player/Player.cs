@@ -8,7 +8,8 @@ public class Player : MonoBehaviour
     private int shot_time = 0;//射撃間隔用
     private Rigidbody2D rb;
     public bool IsDead = false;
-    private bool IsDebugmode = true;
+    private bool IsInvincible = false;
+    private int IsInvincibleCountMax = 240;
     private CountManager CM;
     private ItemManager IM;
     private ShotGenerator SG;
@@ -22,35 +23,31 @@ public class Player : MonoBehaviour
         SG = GameObject.Find("ShotManager").GetComponent<ShotGenerator>();
     }
 
-    void Update()
+    void FixedUpdate()
     {
-        if (IsDead == false)
+        if (!IsDead)
         { //非死亡時
             PlayerMove();
             PlayerShot();
+            PlayerItemCollect();
         }
-        if (this.gameObject.transform.position.y > 3.5f)
+        if(!IsInvincible)
         {
-            IM.AutoItemCollect();
+            PlayerBomStart();
         }
     }
 
     void OnTriggerEnter2D(Collider2D coll)
     {
-        if (IsDead == false)
+        if (coll.gameObject.tag == "Item")
         {
-            if (coll.gameObject.tag == "Item")
-            {
-                coll.gameObject.GetComponent<ItemMove>().ItemCollect();
-            }
-            else
-            {
-                if (!IsDebugmode)
-                {
-                    IsDead = true;
-                    StartCoroutine(Respawn());
-                }
-            }
+            coll.gameObject.GetComponent<ItemMove>().ItemCollect();
+        }
+
+        if(!IsInvincible)
+        {
+            IsDead = true;
+            StartCoroutine(Respawn());
         }
     }
 
@@ -145,6 +142,38 @@ public class Player : MonoBehaviour
         }
     }
 
+    private void PlayerItemCollect()
+    {
+        if (this.gameObject.transform.position.y > 3.5f)
+            {
+                IM.AutoItemCollect();
+            }
+    }
+
+    private void PlayerBomStart()
+    {
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            StartCoroutine(Invincible());
+            StartCoroutine(Bom());
+        }
+    }
+
+    private IEnumerator Invincible()
+    {
+        IsInvincible = true;
+        for(int i=0; i<IsInvincibleCountMax;i++){
+            var _color = this.gameObject.GetComponent<SpriteRenderer>().color;
+            _color.a = 0.5f+Mathf.Cos(i*8*2*Mathf.Acos(-1)/IsInvincibleCountMax)/2;
+            this.gameObject.GetComponent<SpriteRenderer>().color = _color;
+            yield return null;
+        }
+        var __color = this.gameObject.GetComponent<SpriteRenderer>().color;
+        __color.a = 1;
+        this.gameObject.GetComponent<SpriteRenderer>().color = __color;
+        IsInvincible = false;
+    }
+
     private IEnumerator Respawn()
     {
         CM.Life = -1;
@@ -154,6 +183,7 @@ public class Player : MonoBehaviour
             gameover();
         }
         this.transform.position = new Vector3(0, -7, 0);  //画面外に移動
+        StartCoroutine(Invincible());
         rb.velocity = new Vector3(0, 2, 0);
         while (this.transform.position.y < -3.0)
         {
@@ -168,5 +198,23 @@ public class Player : MonoBehaviour
     private void gameover()
     {
 
+    }
+
+    private IEnumerator Bom()
+    {
+        for (int i=0;i < 18*4 ; i++)
+        {
+            Debug.Log(i);
+            SG.Radiation(
+                "player_shot_3",
+                1.0f,
+                this.gameObject.transform.position,
+                1,
+                5.0f,
+                10.0f,
+                i * 20.0f
+            );
+            yield return null;
+        }
     }
 }

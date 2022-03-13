@@ -47,6 +47,11 @@ public class Enemy_Script : MonoBehaviour
             life -= 3;
             OP.Release(coll.gameObject);
         }
+        else if (coll.gameObject.name == "player_shot_3")
+        {
+            life -= 2;
+            OP.Release(coll.gameObject);
+        }
     }
 
     private void shootdown()
