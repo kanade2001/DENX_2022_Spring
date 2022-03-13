@@ -59,7 +59,6 @@ public class ItemMove : MonoBehaviour
     }
     public void ItemCollect()
     {
-        AddScoreItem();
         IsCollect = true;
         if(IsValidpoint == true)
         {

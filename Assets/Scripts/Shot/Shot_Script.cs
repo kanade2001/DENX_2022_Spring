@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Shot_Script : MonoBehaviour
 {
-    [SerializeField] int IsDircheck = 0;
+    public bool IsDircheck = false;
     private ObjectPool OP;
     void Start()
     {
@@ -14,7 +14,7 @@ public class Shot_Script : MonoBehaviour
     void Update()
     {
         IsOutofRange();
-        if (IsDircheck == 1)
+        if (IsDircheck)
         {
             var _v = this.GetComponent<Rigidbody2D>().velocity;
             var _dir = new Vector3(_v.x, _v.y, 0.0f);
