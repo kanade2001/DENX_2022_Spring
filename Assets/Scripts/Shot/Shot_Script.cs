@@ -26,7 +26,7 @@ public class Shot_Script : MonoBehaviour
     {
         float x = transform.position.x;
         float y = transform.position.y;
-        if (System.Math.Abs(x) > 7 || System.Math.Abs(y) > 7)
+        if (System.Math.Abs(x) > 10 || System.Math.Abs(y) > 10)
         {
             OP.Release(gameObject);
         }

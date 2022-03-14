@@ -61,6 +61,23 @@ public class ShotGenerator : MonoBehaviour
         return _list;
     }
 
+    public GameObject Single(string shot_type, float scale, Vector3 Pos, float speed, float direction = -1)
+    {
+        direction = direction * Pi / 180.0f;
+
+        if (direction < 0)
+        {
+            direction = GetAngle(Pos);
+        }
+
+        float dir = direction;
+        var bullet = script_pool.Create(shot_type);
+        bullet.transform.position = Pos;
+        Rigidbody2D rb = bullet.transform.GetComponent<Rigidbody2D>();
+        rb.velocity = new Vector3(-Mathf.Sin(dir) * speed, -Mathf.Cos(dir) * speed, 0.0f);
+        return bullet;
+    }
+
     private float GetAngle(Vector3 Enemy_pos)
     {
         float Enemy_x = Enemy_pos.x;

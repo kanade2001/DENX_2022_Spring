@@ -42,9 +42,7 @@ public class Player : MonoBehaviour
         if (coll.gameObject.tag == "Item")
         {
             coll.gameObject.GetComponent<ItemMove>().ItemCollect();
-        }
-
-        if(!IsInvincible)
+        }else if(!IsInvincible)
         {
             IsDead = true;
             StartCoroutine(Respawn());
